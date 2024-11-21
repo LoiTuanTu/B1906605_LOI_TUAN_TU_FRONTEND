@@ -34,6 +34,15 @@
                 <i class="fas fa-address-card"></i>
             </h4>
             <ContactCard :contact="activeContact" />
+            <router-link
+            :to="{
+                name: 'contact.edit',
+                params: { id: activeContact._id },
+            }"
+            >
+            <span class="mt-2badge badge-warning">
+                <i class="fas fa-edit"></i>Hiệu chỉnh</span>
+            </router-link>
         </div>
     </div>
     </div>
@@ -43,7 +52,7 @@
 import ContactCard from "@/components/ContactCard.vue";
 import InputSearch from "@/components/InputSearch.vue";
 import ContactList from "@/components/ContactList.vue";
-import contactService from "@/services/contact.service";
+import ContactService from "@/services/contact.service";
 
 export default {
     components: {
@@ -94,7 +103,7 @@ export default {
     methods: {
         async retrieveContacts() {
             try {
-                this.contacts = await contactService.getAll();
+                this.contacts = await ContactService.getAll();
             } catch (error) {
                 console.error;
             }
